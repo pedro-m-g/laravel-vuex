@@ -4,10 +4,10 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+import './bootstrap'
 
-window.Vue = require('vue');
-window.Vuex = require('vuex');
+import Vue from 'vue'
+import Vuex from 'vuex'
 
 /**
  * The following block of code may be used to automatically register your
@@ -19,6 +19,8 @@ window.Vuex = require('vuex');
 
 const files = require.context('./components/', true, /\.vue$/i)
 files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+
+Vue.use(Vuex)
 
 // Vuex store, available in store.js file
 const store = new Vuex.Store(require('./store.js').default)
@@ -32,4 +34,4 @@ const store = new Vuex.Store(require('./store.js').default)
 const app = new Vue({
     el: '#app',
     store
-});
+})
