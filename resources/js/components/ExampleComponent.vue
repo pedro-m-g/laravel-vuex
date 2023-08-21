@@ -1,36 +1,32 @@
 <template>
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <h1>TODO app</h1>
-                <form @submit.prevent="item ? addItem(item) : null ">
-                    <div class="form-group">
-                        <input
-                            type="text"
-                            class="form-control"
-                            placeholder="New item..."
-                            v-model="item"
-                        />
-                        <button
-                            type="submit"
-                            class="btn btn-primary"
-                        >
-                            OK
-                        </button>
-                    </div>
-                </form>
-                <ul class="list-group">
-                    <li
-                        v-for="(item, i) in items"
-                        :key="i"
-                        class="list-group-item"
-                    >
-                        {{ item }}
-                    </li>
-                </ul>
+    <main>
+        <h1>TODO app</h1>
+        <form @submit.prevent="item ? addItem(item) : null ">
+            <div class="form-group">
+                <input
+                    type="text"
+                    class="form-control"
+                    placeholder="New item..."
+                    v-model="item"
+                />
+                <button
+                    type="submit"
+                    class="form-submit-button"
+                >
+                    OK
+                </button>
             </div>
-        </div>
-    </div>
+        </form>
+        <section class="todo-list">
+            <div
+                v-for="(item, i) in items"
+                :key="i"
+                class="todo-list-item"
+            >
+                {{ item }}
+            </div>
+        </section>
+    </main>
 </template>
 <script>
 import { mapState, mapMutations } from 'vuex'

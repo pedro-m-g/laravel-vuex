@@ -46,13 +46,7 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", {
-    staticClass: "container"
-  }, [_c("div", {
-    staticClass: "row"
-  }, [_c("div", {
-    staticClass: "col-12"
-  }, [_c("h1", [_vm._v("TODO app")]), _vm._v(" "), _c("form", {
+  return _c("main", [_c("h1", [_vm._v("TODO app")]), _vm._v(" "), _c("form", {
     on: {
       submit: function submit($event) {
         $event.preventDefault();
@@ -83,18 +77,18 @@ var render = function render() {
       }
     }
   }), _vm._v(" "), _c("button", {
-    staticClass: "btn btn-primary",
+    staticClass: "form-submit-button",
     attrs: {
       type: "submit"
     }
-  }, [_vm._v("\n                        OK\n                    ")])])]), _vm._v(" "), _c("ul", {
-    staticClass: "list-group"
+  }, [_vm._v("\n                OK\n            ")])])]), _vm._v(" "), _c("section", {
+    staticClass: "todo-list"
   }, _vm._l(_vm.items, function (item, i) {
-    return _c("li", {
+    return _c("div", {
       key: i,
-      staticClass: "list-group-item"
-    }, [_vm._v("\n                    " + _vm._s(item) + "\n                ")]);
-  }), 0)])])]);
+      staticClass: "todo-list-item"
+    }, [_vm._v("\n            " + _vm._s(item) + "\n        ")]);
+  }), 0)]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
