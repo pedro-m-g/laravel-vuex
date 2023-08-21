@@ -59,7 +59,12 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapState)([_store__WEBPACK_IMPORTED_MODULE_1__.TODO_ITEMS_STATE]))
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapState)([_store__WEBPACK_IMPORTED_MODULE_1__.TODO_ITEMS_STATE])),
+  methods: _objectSpread({
+    onDeleteTodoItem: function onDeleteTodoItem(todoItem) {
+      this.deleteTodoItem(todoItem);
+    }
+  }, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)([_store__WEBPACK_IMPORTED_MODULE_1__.DELETE_TODO_ITEM_ACTION]))
 });
 
 /***/ }),
@@ -72,11 +77,18 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   DELETE_EVENT: () => (/* binding */ DELETE_EVENT),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+var DELETE_EVENT = 'delete';
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
-    item: String
+    todoItem: Object
+  },
+  methods: {
+    onDelete: function onDelete() {
+      this.$emit(DELETE_EVENT, this.todoItem);
+    }
   }
 });
 
@@ -177,11 +189,14 @@ var render = function render() {
     _c = _vm._self._c;
   return _c("section", {
     staticClass: "todo-list"
-  }, _vm._l(_vm.todoItems, function (item, index) {
+  }, _vm._l(_vm.todoItems, function (todoItem) {
     return _c("TodoListItem", {
-      key: index,
+      key: todoItem.id,
       attrs: {
-        item: item
+        todoItem: todoItem
+      },
+      on: {
+        "delete": _vm.onDeleteTodoItem
       }
     });
   }), 1);
@@ -208,7 +223,12 @@ var render = function render() {
     _c = _vm._self._c;
   return _c("div", {
     staticClass: "todo-list-item"
-  }, [_vm._v(_vm._s(_vm.item))]);
+  }, [_c("span", [_vm._v(_vm._s(_vm.todoItem.text))]), _vm._v(" "), _c("div", [_c("span", {
+    staticClass: "delete-button",
+    on: {
+      click: _vm.onDelete
+    }
+  }, [_vm._v("×")])])]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -265,6 +285,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   ADD_TODO_ITEM_ACTION: () => (/* binding */ ADD_TODO_ITEM_ACTION),
 /* harmony export */   ADD_TODO_ITEM_MUTATION: () => (/* binding */ ADD_TODO_ITEM_MUTATION),
+/* harmony export */   DELETE_TODO_ITEM_ACTION: () => (/* binding */ DELETE_TODO_ITEM_ACTION),
+/* harmony export */   DELETE_TODO_ITEM_MUTATION: () => (/* binding */ DELETE_TODO_ITEM_MUTATION),
 /* harmony export */   TODO_ITEMS_STATE: () => (/* binding */ TODO_ITEMS_STATE),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
@@ -275,23 +297,42 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symb
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 var ADD_TODO_ITEM_ACTION = 'addTodoItem';
+var DELETE_TODO_ITEM_ACTION = 'deleteTodoItem';
 var ADD_TODO_ITEM_MUTATION = 'addTodoItem';
+var DELETE_TODO_ITEM_MUTATION = 'deleteTodoItem';
 var TODO_ITEMS_STATE = 'todoItems';
+var nextID = 1;
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   state: {
     todoItems: []
   },
   actions: {
-    addTodoItem: function addTodoItem(context, todoItem) {
+    addTodoItem: function addTodoItem(context, todoItemText) {
+      if (!todoItemText) {
+        return;
+      }
+      var todoItem = {
+        id: nextID,
+        text: todoItemText
+      };
+      context.commit(ADD_TODO_ITEM_MUTATION, todoItem);
+      nextID++;
+    },
+    deleteTodoItem: function deleteTodoItem(context, todoItem) {
       if (!todoItem) {
         return;
       }
-      context.commit(ADD_TODO_ITEM_MUTATION, todoItem);
+      context.commit(DELETE_TODO_ITEM_MUTATION, todoItem);
     }
   },
   mutations: {
     addTodoItem: function addTodoItem(state, todoItem) {
       state.todoItems = [].concat(_toConsumableArray(state.todoItems), [todoItem]);
+    },
+    deleteTodoItem: function deleteTodoItem(state, todoItem) {
+      state.todoItems = state.todoItems.filter(function (eachItem) {
+        return eachItem.id !== todoItem.id;
+      });
     }
   }
 });
@@ -430,6 +471,7 @@ component.options.__file = "resources/js/components/TodoList.vue"
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   DELETE_EVENT: () => (/* reexport safe */ _TodoListItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.DELETE_EVENT),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _TodoListItem_vue_vue_type_template_id_65e370bc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TodoListItem.vue?vue&type=template&id=65e370bc& */ "./resources/js/components/TodoListItem.vue?vue&type=template&id=65e370bc&");
@@ -498,6 +540,7 @@ __webpack_require__.r(__webpack_exports__);
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   DELETE_EVENT: () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TodoListItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.DELETE_EVENT),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TodoListItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./TodoListItem.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/TodoListItem.vue?vue&type=script&lang=js&");

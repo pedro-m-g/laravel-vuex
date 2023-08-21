@@ -52,6 +52,8 @@ form {
 .todo-list-item {
     border: solid 1px #cfd8dc;
     padding: 0.5rem;
+    display: flex;
+    justify-content: space-between;
 }
 
 .todo-list-item:first-child {
@@ -62,4 +64,16 @@ form {
 .todo-list-item:last-child {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+}
+
+.delete-button {
+    color: #f44336;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+
+}
+
+.delete-button:hover {
+    color: #b71c1c;
 }
