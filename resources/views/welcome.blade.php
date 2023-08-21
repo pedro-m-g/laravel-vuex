@@ -10,7 +10,7 @@
     <body>
         <div id="app">
             <!-- Here we use a custom Vue component -->
-            <example-component></example-component>
+            <todo-app></todo-app>
         </div>
     </body>
     <script src="{{ asset('js/app.js') }}"></script>

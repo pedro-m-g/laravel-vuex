@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import ExampleComponent from './components/ExampleComponent'
+import TodoApp from './components/TodoApp'
 import store from './store'
 
-Vue.component('ExampleComponent', ExampleComponent)
+Vue.component('TodoApp', TodoApp)
 
 Vue.use(Vuex)
 const appStore = new Vuex.Store(store)
