@@ -13,6 +13,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store */ "./resources/js/store.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -20,21 +21,19 @@ function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key i
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      newItem: ''
+      newTodoItem: ''
     };
   },
   methods: _objectSpread({
     onSubmit: function onSubmit() {
-      if (!this.newItem) {
-        return;
-      }
-      this.addItem(this.newItem);
-      this.newItem = '';
+      this.addTodoItem(this.newTodoItem);
+      this.newTodoItem = '';
     }
-  }, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)(['addItem']))
+  }, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)([_store__WEBPACK_IMPORTED_MODULE_1__.ADD_TODO_ITEM_ACTION]))
 });
 
 /***/ }),
@@ -50,6 +49,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store */ "./resources/js/store.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -57,8 +57,9 @@ function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key i
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapState)(['items']))
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapState)([_store__WEBPACK_IMPORTED_MODULE_1__.TODO_ITEMS_STATE]))
 });
 
 /***/ }),
@@ -108,8 +109,8 @@ var render = function render() {
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: _vm.newItem,
-      expression: "newItem"
+      value: _vm.newTodoItem,
+      expression: "newTodoItem"
     }],
     staticClass: "form-control",
     attrs: {
@@ -117,12 +118,12 @@ var render = function render() {
       placeholder: "New item..."
     },
     domProps: {
-      value: _vm.newItem
+      value: _vm.newTodoItem
     },
     on: {
       input: function input($event) {
         if ($event.target.composing) return;
-        _vm.newItem = $event.target.value;
+        _vm.newTodoItem = $event.target.value;
       }
     }
   }), _vm._v(" "), _c("button", {
@@ -130,7 +131,7 @@ var render = function render() {
     attrs: {
       type: "submit"
     }
-  }, [_vm._v("OK")])])]);
+  }, [_vm._v("\n            OK\n        ")])])]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -176,7 +177,7 @@ var render = function render() {
     _c = _vm._self._c;
   return _c("section", {
     staticClass: "todo-list"
-  }, _vm._l(_vm.items, function (item, index) {
+  }, _vm._l(_vm.todoItems, function (item, index) {
     return _c("TodoListItem", {
       key: index,
       attrs: {
@@ -262,19 +263,35 @@ new vue__WEBPACK_IMPORTED_MODULE_6__["default"]({
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ADD_TODO_ITEM_ACTION: () => (/* binding */ ADD_TODO_ITEM_ACTION),
+/* harmony export */   ADD_TODO_ITEM_MUTATION: () => (/* binding */ ADD_TODO_ITEM_MUTATION),
+/* harmony export */   TODO_ITEMS_STATE: () => (/* binding */ TODO_ITEMS_STATE),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+var ADD_TODO_ITEM_ACTION = 'addTodoItem';
+var ADD_TODO_ITEM_MUTATION = 'addTodoItem';
+var TODO_ITEMS_STATE = 'todoItems';
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  // These variables are accessible on all components.
-  // For example this.$store.items
   state: {
-    items: []
+    todoItems: []
   },
-  // These methods MUST be the only way to change store state.
-  // You call them in components like this.$store.commit('addItem', item)
+  actions: {
+    addTodoItem: function addTodoItem(context, todoItem) {
+      if (!todoItem) {
+        return;
+      }
+      context.commit(ADD_TODO_ITEM_MUTATION, todoItem);
+    }
+  },
   mutations: {
-    addItem: function addItem(state, item) {
-      state.items.push(item);
+    addTodoItem: function addTodoItem(state, todoItem) {
+      state.todoItems = [].concat(_toConsumableArray(state.todoItems), [todoItem]);
     }
   }
 });

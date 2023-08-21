@@ -5,28 +5,28 @@
                 type="text"
                 class="form-control"
                 placeholder="New item..."
-                v-model="newItem"
+                v-model="newTodoItem"
             />
-            <button type="submit" class="form-submit-button">OK</button>
+            <button type="submit" class="form-submit-button">
+                OK
+            </button>
         </div>
     </form>
 </template>
 <script>
-import { mapMutations } from'vuex'
+import { mapActions } from'vuex'
+import { ADD_TODO_ITEM_ACTION } from '../store';
 
 export default {
     data: () => ({
-        newItem: ''
+        newTodoItem: ''
     }),
     methods: {
         onSubmit() {
-            if (!this.newItem) {
-                return
-            }
-            this.addItem(this.newItem)
-            this.newItem = ''
+            this.addTodoItem(this.newTodoItem)
+            this.newTodoItem = ''
         },
-        ...mapMutations(['addItem'])
+        ...mapActions([ADD_TODO_ITEM_ACTION])
     }
 }
 </script>
