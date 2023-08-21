@@ -3,11 +3,19 @@ import Vuex from 'vuex'
 
 import TodoApp from './components/TodoApp'
 import CreateTodoForm from './components/CreateTodoForm'
+import TodoList from './components/TodoList'
 
 import store from './store'
 
-Vue.component('TodoApp', TodoApp)
-Vue.component('CreateTodoForm', CreateTodoForm)
+const components = {
+    TodoApp,
+    CreateTodoForm,
+    TodoList
+}
+
+for (let componentName in components) {
+    Vue.component(componentName, components[componentName])
+}
 
 Vue.use(Vuex)
 const appStore = new Vuex.Store(store)
