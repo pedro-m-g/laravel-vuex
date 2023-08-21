@@ -23,11 +23,19 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      item: ''
+      newItem: ''
     };
   },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapState)(['items'])),
-  methods: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)(['addItem']))
+  methods: _objectSpread({
+    submitCreateTodoForm: function submitCreateTodoForm() {
+      if (!this.newItem) {
+        return;
+      }
+      this.addItem(this.newItem);
+      this.newItem = '';
+    }
+  }, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)(['addItem']))
 });
 
 /***/ }),
@@ -50,7 +58,7 @@ var render = function render() {
     on: {
       submit: function submit($event) {
         $event.preventDefault();
-        _vm.item ? _vm.addItem(_vm.item) : null;
+        return _vm.submitCreateTodoForm.apply(null, arguments);
       }
     }
   }, [_c("div", {
@@ -59,8 +67,8 @@ var render = function render() {
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: _vm.item,
-      expression: "item"
+      value: _vm.newItem,
+      expression: "newItem"
     }],
     staticClass: "form-control",
     attrs: {
@@ -68,12 +76,12 @@ var render = function render() {
       placeholder: "New item..."
     },
     domProps: {
-      value: _vm.item
+      value: _vm.newItem
     },
     on: {
       input: function input($event) {
         if ($event.target.composing) return;
-        _vm.item = $event.target.value;
+        _vm.newItem = $event.target.value;
       }
     }
   }), _vm._v(" "), _c("button", {
@@ -81,7 +89,7 @@ var render = function render() {
     attrs: {
       type: "submit"
     }
-  }, [_vm._v("\n                OK\n            ")])])]), _vm._v(" "), _c("section", {
+  }, [_vm._v("OK")])])]), _vm._v(" "), _c("section", {
     staticClass: "todo-list"
   }, _vm._l(_vm.items, function (item, i) {
     return _c("div", {
