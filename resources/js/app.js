@@ -4,13 +4,15 @@ import Vuex from 'vuex'
 import TodoApp from './components/TodoApp'
 import CreateTodoForm from './components/CreateTodoForm'
 import TodoList from './components/TodoList'
+import TodoListItem from './components/TodoListItem'
 
 import store from './store'
 
 const components = {
     TodoApp,
     CreateTodoForm,
-    TodoList
+    TodoList,
+    TodoListItem
 }
 
 for (let componentName in components) {
