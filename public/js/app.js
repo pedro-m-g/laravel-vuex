@@ -263,11 +263,17 @@ var components = {
   TodoList: _components_TodoList__WEBPACK_IMPORTED_MODULE_3__["default"],
   TodoListItem: _components_TodoListItem__WEBPACK_IMPORTED_MODULE_4__["default"]
 };
+
+// Register Vue components
 for (var componentName in components) {
   vue__WEBPACK_IMPORTED_MODULE_6__["default"].component(componentName, components[componentName]);
 }
+
+// Initialize Vuex store
 vue__WEBPACK_IMPORTED_MODULE_6__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_0__["default"]);
 var appStore = new vuex__WEBPACK_IMPORTED_MODULE_0__["default"].Store(_store__WEBPACK_IMPORTED_MODULE_5__["default"]);
+
+// Initialize root Vue component
 new vue__WEBPACK_IMPORTED_MODULE_6__["default"]({
   el: '#app',
   store: appStore
@@ -296,11 +302,18 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+// Vuex actions are the functions we call directly from Vue components
 var ADD_TODO_ITEM_ACTION = 'addTodoItem';
 var DELETE_TODO_ITEM_ACTION = 'deleteTodoItem';
+
+// Vuex mutations are the internal functions responsible for updating state
 var ADD_TODO_ITEM_MUTATION = 'addTodoItem';
 var DELETE_TODO_ITEM_MUTATION = 'deleteTodoItem';
+
+// Vuex state is the only source of truth for the store
 var TODO_ITEMS_STATE = 'todoItems';
+
+// Next ID for new items
 var nextID = 1;
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   state: {

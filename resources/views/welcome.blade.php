@@ -9,7 +9,7 @@
     </head>
     <body>
         <div id="app">
-            <!-- Here we use a custom Vue component -->
+            <!-- Render TodoApp Vue component -->
             <todo-app></todo-app>
         </div>
     </body>
